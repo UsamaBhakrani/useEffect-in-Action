@@ -55,10 +55,22 @@ const App = () => {
     }
   };
 
+  const handleOnClick = () => {
+    const newUser = { id: 0, name: "Usama Bhakrani" };
+    setUsers([...users, newUser]);
+
+    axios
+      .post("https://jsonplaceholder.typicode.com/users", newUser)
+      .then((res) => setUsers([res.data, ...users]));
+  };
+
   return (
     <div>
       {error && <p className="text-danger">{error}</p>}
       {isLoading && <div className="spinner-border"></div>}
+      <button className="btn btn-primary mb-3" onClick={handleOnClick}>
+        Add
+      </button>
       <ul className="list-group">
         {users.map((user) => {
           return (
